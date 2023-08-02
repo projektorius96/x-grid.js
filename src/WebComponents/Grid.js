@@ -4,6 +4,9 @@ const [
     'open', '\u{005F}', '\u{002D}'
 ];
 
+/** 
+ * @tutorial @https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements#using_the_lifecycle_callbacks
+*/
 class Row_Constructor extends HTMLElement{
     static namespace = "Row_";
     static custom_element_namespace = Row_Constructor.name.toLowerCase().replace(RegExp(UNDERSCORE).source, RegExp(NONBRHYPHEN).source)
@@ -14,7 +17,9 @@ class Row_Constructor extends HTMLElement{
         this.id = props?.id;
         ;
         const shadowHost = document.querySelector( (props?.shadowHost || document.body.tagName) )
-        this.style.display = "grid";
+        shadowHost.style.display = "grid";
+        shadowHost.style.height = "100vh";
+        this.style.display = "inherit";
         if (props.dimConfig.dimension){
             this.style.gridTemplateRows = `repeat(12, minmax(0, 1fr))`;
         }
@@ -35,9 +40,8 @@ class Column_Constructor extends HTMLElement{
         this.attachShadow({mode});
         this.id = props?.id;
         this.style.border = "1px solid black";
-        this.style.padding = "16px";
-        const shadowHostInner = document.querySelectorAll(props.shadowHostInner)[props.idx];
-        shadowHostInner.appendChild(this)
+        this.style.padding = "8px";
+        this.style.backgroundColor = "#e8e8e8";
     }
 }
 
