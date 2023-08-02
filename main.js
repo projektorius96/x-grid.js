@@ -21,9 +21,15 @@ array_template1:
       const eachRow = document.getElementById(SHADOWHOST).children;
       /* DEV_NOTE # shadow root property is not mandatory, although it indicates open shadow dom */
       eachRow[j].shadowRoot.appendChild(
-          (new Col({id: `${Row.namespace}${1+k}:${Col.namespace}${1+j}`}))
+          (new Col({id: `${Row.namespace}${1+k}:${Col.namespace}${1+j}`, shadowHostInner: Row.custom_element_namespace, idx: j}))
       );
     });
 
 })
+
+/* +++ DATA VALUE UPDATE EXAMPLE [SEE BELOW] +++ */
+/* 
+document.querySelector("#Row_1").shadowRoot.firstChild.shadowRoot.innerHTML = 123; // or even better for more fine-grained control as follows:
+document.getElementById("Row_1").shadowRoot.getElementById("Row_1:Column_1")
+*/
 

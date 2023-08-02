@@ -1,11 +1,12 @@
 const [
-    mode, DIV, UNDERSCORE, NONBRHYPHEN
+    mode, UNDERSCORE, NONBRHYPHEN
 ] = [
-    'open', 'div', '\u{005F}', '\u{002D}'
+    'open', '\u{005F}', '\u{002D}'
 ];
 
-class Row_Constructor extends HTMLDivElement{
+class Row_Constructor extends HTMLElement{
     static namespace = "Row_";
+    static custom_element_namespace = Row_Constructor.name.toLowerCase().replace(RegExp(UNDERSCORE).source, RegExp(NONBRHYPHEN).source)
     constructor(props){
         super()
         ;
@@ -13,28 +14,30 @@ class Row_Constructor extends HTMLDivElement{
         this.id = props?.id;
         ;
         const shadowHost = document.querySelector( (props?.shadowHost || document.body.tagName) )
-        shadowHost.style.display = "grid";
+        this.style.display = "grid";
         if (props.dimConfig.dimension){
-            shadowHost.style.gridTemplateRows = `repeat(12, minmax(0, 1fr))`;
+            this.style.gridTemplateRows = `repeat(12, minmax(0, 1fr))`;
         }
         else {
-            shadowHost.style.gridTemplateRows = `repeat(1, minmax(0, 1fr))`;
+            this.style.gridTemplateRows = `repeat(1, minmax(0, 1fr))`;
         }
-        shadowHost.style.gridTemplateColumns = `repeat(12, minmax(0, 1fr))`;
+        this.style.gridTemplateColumns = `repeat(12, minmax(0, 1fr))`;
         ;
         shadowHost.appendChild(this);
     }
 }
 
-class Column_Constructor extends HTMLDivElement{
+class Column_Constructor extends HTMLElement{
     static namespace = 'Column_';
     constructor(props){
         super()
         ;
-        this.attachShadow({mode}).innerHTML = Math.random();
+        this.attachShadow({mode});
         this.id = props?.id;
         this.style.border = "1px solid black";
         this.style.padding = "16px";
+        const shadowHostInner = document.querySelectorAll(props.shadowHostInner)[props.idx];
+        shadowHostInner.appendChild(this)
     }
 }
 
@@ -42,14 +45,12 @@ if (Row_Constructor && Column_Constructor){
     customElements.define(
         Row_Constructor.name.toLowerCase().replace(RegExp(UNDERSCORE).source, RegExp(NONBRHYPHEN).source)
         ,
-        Row_Constructor,
-        {extends: DIV}
+        Row_Constructor
     );
     customElements.define(
         Column_Constructor.name.toLowerCase().replace(RegExp(UNDERSCORE).source, RegExp(NONBRHYPHEN).source)
         ,
-        Column_Constructor,
-        {extends: DIV}
+        Column_Constructor
     )
 }
 
