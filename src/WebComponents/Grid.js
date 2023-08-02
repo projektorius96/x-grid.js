@@ -31,7 +31,7 @@ class Column_Constructor extends HTMLDivElement{
     constructor(props){
         super()
         ;
-        this.attachShadow({mode});
+        this.attachShadow({mode}).innerHTML = Math.random();
         this.id = props?.id;
         this.style.border = "1px solid black";
         this.style.padding = "16px";
@@ -54,5 +54,5 @@ if (Row_Constructor && Column_Constructor){
 }
 
 export {
-    Row_Constructor, Column_Constructor
+    Row_Constructor as Row, Column_Constructor as Column
 }

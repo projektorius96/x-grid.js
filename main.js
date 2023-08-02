@@ -1,5 +1,5 @@
 import './global.css';
-import { Row_Constructor as Row, Column_Constructor as Col } from "./src/WebComponents/Grid.js";
+import { Row, Column as Col } from "./src/WebComponents/Grid.js";
 
 const [
   [UNISCALAR, UNIDIMENSIONAL], [MULTISCALAR, MULTIDIMENSIONAL], SHADOWHOST
@@ -21,8 +21,8 @@ array_template1:
       const eachRow = document.getElementById(SHADOWHOST).children;
       /* DEV_NOTE # shadow root property is not mandatory, although it indicates open shadow dom */
       eachRow[j].shadowRoot.appendChild(
-          new Col({id: `${Row.namespace}${1+k}:${Col.namespace}${1+j}`})
-        )
+          (new Col({id: `${Row.namespace}${1+k}:${Col.namespace}${1+j}`}))
+      );
     });
 
 })
