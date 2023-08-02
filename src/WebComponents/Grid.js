@@ -5,16 +5,19 @@ const [
 ];
 
 class Row_Constructor extends HTMLDivElement{
-    constructor(){
+    constructor(props){
         super()
         this.attachShadow({mode})
+        this.id = props?.id;
+        document.querySelector( (props?.shadowHost || document.body) ).appendChild(this);
     }
 }
 
 class Column_Constructor extends HTMLDivElement{
-    constructor(){
+    constructor(props){
         super()
         this.attachShadow({mode})
+        this.id = props?.id;
     }
 }
 
