@@ -5,19 +5,24 @@ const [
 ];
 
 class Row_Constructor extends HTMLDivElement{
+    static namespace = 'Row_';
     constructor(props){
         super()
-        this.attachShadow({mode})
+        this.attachShadow({mode});
         this.id = props?.id;
-        document.querySelector( (props?.shadowHost || document.body) ).appendChild(this);
+        this.style.cssText = "border: 2px solid black; padding: 16px";
+        document.querySelector( (props?.shadowHost || document.body.tagName) ).appendChild(this);
     }
 }
 
 class Column_Constructor extends HTMLDivElement{
+    static namespace = 'Column_';
     constructor(props){
         super()
         this.attachShadow({mode})
         this.id = props?.id;
+        this.style.cssText = "border: 1px dashed red; padding: 8px";
+        document.body.appendChild(this)
     }
 }
 

@@ -7,8 +7,12 @@ const [
   12, "shadow-host"
 ];[...new Array(DIMENSION).fill(0)].forEach((_, j)=>{
 
-  new Row({id: 1+j, shadowHost: `#${SHADOWHOST}`}) && [...new Array(DIMENSION).fill(0)].forEach((_, k)=>{
-    document.getElementById(SHADOWHOST).children[j].appendChild(new Col({id: 1+k}))
+  new Row({id: `${Row.namespace}${1+j}`, shadowHost: `#${SHADOWHOST}`}) && [...new Array(DIMENSION).fill(0)].forEach((_, k)=>{
+    const eachRow = document.getElementById(SHADOWHOST).children;
+    /* DEV_NOTE # shadow root property is not mandatory, although it indicates open shadow dom */
+    eachRow[j].shadowRoot.appendChild(
+        new Col({id: `${Row.namespace}${1+j}:${Col.namespace}${1+k}`})
+      )
   });
 
 })
