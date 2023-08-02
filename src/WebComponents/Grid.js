@@ -5,13 +5,24 @@ const [
 ];
 
 class Row_Constructor extends HTMLDivElement{
-    static namespace = 'Row_';
+    static namespace = "Row_";
     constructor(props){
         super()
+        ;
         this.attachShadow({mode});
         this.id = props?.id;
-        this.style.cssText = "border: 2px solid black; padding: 16px";
-        document.querySelector( (props?.shadowHost || document.body.tagName) ).appendChild(this);
+        ;
+        const shadowHost = document.querySelector( (props?.shadowHost || document.body.tagName) )
+        shadowHost.style.display = "grid";
+        if (props.dimConfig.dimension){
+            shadowHost.style.gridTemplateRows = `repeat(12, minmax(0, 1fr))`;
+        }
+        else {
+            shadowHost.style.gridTemplateRows = `repeat(1, minmax(0, 1fr))`;
+        }
+        shadowHost.style.gridTemplateColumns = `repeat(12, minmax(0, 1fr))`;
+        ;
+        shadowHost.appendChild(this);
     }
 }
 
@@ -19,10 +30,11 @@ class Column_Constructor extends HTMLDivElement{
     static namespace = 'Column_';
     constructor(props){
         super()
-        this.attachShadow({mode})
+        ;
+        this.attachShadow({mode});
         this.id = props?.id;
-        this.style.cssText = "border: 1px dashed red; padding: 8px";
-        document.body.appendChild(this)
+        this.style.border = "1px solid black";
+        this.style.padding = "16px";
     }
 }
 
