@@ -7,7 +7,7 @@ const [
   [12, false], [(12*12), true], "shadow-host"
 ];
 
-/* DEV_NOTE (IMPORTANT) # UNISCALAR has to go hand in hand with UNIDIMENSIONAL, whilst MULTISCALAR hand in hand with MULTIDIMENSIONAL in array_templateN and dimConfig mutually exclusively */
+/* DEV_NOTE (IMPORTANT) # UNISCALAR has to go hand in hand with UNIDIMENSIONAL, whilst MULTISCALAR hand in hand with MULTIDIMENSIONAL in array_templateN and dimConfig mutually inclusively */
 array_template1:
 [...new Array(UNISCALAR /* ||  MULTISCALAR */).fill(0)].forEach((_, j)=>{
 
